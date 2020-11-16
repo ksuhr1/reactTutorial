@@ -9,7 +9,8 @@ class App extends Component {
       {name: 'Manu', age: 29},
       {name: 'Stephanie', age: 26}
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
 
   }
 
@@ -38,6 +39,15 @@ class App extends Component {
     });
   }
 
+  togglePersonsHandler = () => {
+    // current state
+    const doesShow = this.state.showPersons;
+    // set state merges to the author state
+    this.setState({showPersons: !doesShow});
+
+
+  }
+
   render() {
     const style = {
         backgroundColor: 'white',
@@ -53,17 +63,21 @@ class App extends Component {
       <p> This is working</p>
       <button
         style={style}
-        onClick={()=> this.switchNameHandler('Katy Alexa')}>Switch Name</button>
-      <Person
-        name={this.state.persons[0].name}
-        age={this.state.persons[0].age} />
-      <Person
-        name={this.state.persons[1].name}  age={this.state.persons[1].age}
-        click={this.switchNameHandler.bind(this, 'Timothy Antonio')}
-        changed={this.nameChangedHandler}> My hobbies: singing</Person>
-      <Person
-        name={this.state.persons[2].name}  age={this.state.persons[2].age} />
-      </div>
+        onClick={this.togglePersonsHandler}>Switch Name</button>
+      { this.state.showPersons === true ?
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+          <Person
+            name={this.state.persons[1].name}  age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Timothy Antonio')}
+            changed={this.nameChangedHandler}> My hobbies: singing</Person>
+          <Person
+            name={this.state.persons[2].name}  age={this.state.persons[2].age} />
+        </div> : null
+      }
+    </div>
     );
     // return React.createElement('div', {className:'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
