@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
-import Radium, { StyleRoot }from 'radium';
+import styled from 'styled-components';
+
+
+
+const StyledButton = styled.button`
+    background-color: green;
+    color: white;
+    font:inherit;
+    border:1px solid blue;
+    paddding: 8px;
+    cursor: pointer;
+
+    &:hover: {
+        background-color: lightgreen;
+        color: black;
+    }
+`;
 
 class App extends Component {
   state = {
@@ -117,20 +133,18 @@ class App extends Component {
       classes.push('bold'); // classes = ['red', 'bold']
     }
     return (
-      <StyleRoot>
         <div className="App">
         <h1> Hi, I'm a React App</h1>
         <p className={classes.join(' ')}> This is working</p>
-        <button
-          style={style}
-          onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        <StyledButton
+          onClick={this.togglePersonsHandler}>Toggle Persons
+        </StyledButton>
         {persons}
         </div>
-      </StyleRoot>
     );
 
     // return React.createElement('div', {className:'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default Radium(App);
+export default App;
