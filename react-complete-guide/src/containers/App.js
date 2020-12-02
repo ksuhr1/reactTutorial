@@ -7,16 +7,44 @@ import Cockpit from '../components/Cockpit/Cockpit';
 //this container manages state and maniputlates state
 
 class App extends Component {
-  state = {
-    persons: [
-      {id: '1', name: 'Max', age: 28 },
-      {id: '2', name: 'Manu', age: 29},
-      {id: '3', name: 'Stephanie', age: 26}
-    ],
-    otherState: 'some other value',
-    showPersons: false
 
+  // set up state
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+
+    this.state = {
+      persons: [
+        {id: '1', name: 'Max', age: 28 },
+        {id: '2', name: 'Manu', age: 29},
+        {id: '3', name: 'Stephanie', age: 26}
+      ],
+      otherState: 'some other value',
+      showPersons: false
+
+    }
   }
+
+  static getDerivedStateFromProps(props, state){
+
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+  //
+  // state = {
+  //   persons: [
+  //     {id: '1', name: 'Max', age: 28 },
+  //     {id: '2', name: 'Manu', age: 29},
+  //     {id: '3', name: 'Stephanie', age: 26}
+  //   ],
+  //   otherState: 'some other value',
+  //   showPersons: false
+  //
+  // }
 
   nameChangedHandler = (event, id) => {
     // find person index
@@ -74,6 +102,7 @@ class App extends Component {
   //this will take individual elements of array
   // and render them to the DOM if they are valid jsx
   render() {
+    console.log('[App.js] render');
     let persons = null;
 
     if (this.state.showPersons) {
