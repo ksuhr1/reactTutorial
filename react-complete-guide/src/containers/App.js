@@ -31,8 +31,18 @@ class App extends Component {
     return state;
   }
 
+
+  /* These 3 lifecycle hooks are the most important */
+  
   componentDidMount() {
     console.log('[App.js] componentDidMount');
+  }
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+  componentDidUpdate(prevProps, prevState, snapshot){
+    console.log('[App.js] componentDidUpdate');
   }
   //
   // state = {

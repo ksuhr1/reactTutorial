@@ -9,6 +9,10 @@ class Persons extends Component {
   //   return state;
   // }
 
+  // outdated
+  // componentWillReceiveProps(nextProps){
+  //   console.log('[Persons.js] componentWillReceiveProps');
+  // }
   shouldComponentUpdate(nextProps, nextState){
     console.log('[Persons.js] shouldComponentUpdate');
     return true;
@@ -16,12 +20,14 @@ class Persons extends Component {
 
   getSnapshotBeforeUpdate(prevProps, prevState){
     console.log('[Persons.js] getSnapshotBeforeUpdate');
-    return null;
+    return {message: 'Snapshot!'};
 
   }
 
+
   componentDidUpdate(prevProps, prevState, snapshot){
     console.log('[Perosns.js] componentDidUpdate')
+    console.log(snapshot);
   }
 
 
