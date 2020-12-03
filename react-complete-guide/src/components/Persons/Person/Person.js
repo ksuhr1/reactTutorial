@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react';
 import classes from './Person.css';
+import withClass from '../../../hoc/withClass';
 import Aux from '../../../hoc/Aux';
 //state less componenets because it's not managing a state
 // want way more of these components
@@ -27,4 +28,4 @@ class Person extends Component {
 
 
 
-export default Person;
+export default withClass(Person, classes.Person);

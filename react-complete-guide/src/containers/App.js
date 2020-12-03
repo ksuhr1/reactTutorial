@@ -3,7 +3,8 @@ import classes from  './App.css';
 import Persons from '../components/Persons/Persons';
 import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import withClass from '../hoc/withClass';
+import Aux from '../hoc/Aux';
 
 //this container manages state and maniputlates state
 
@@ -131,7 +132,7 @@ class App extends Component {
 
 
     return (
-        <WithClass classes={classes.App}>
+        <Aux>
           <button onClick={() => {
               this.setState({showCockpit:false});
             }}
@@ -146,7 +147,7 @@ class App extends Component {
             />
         ) : null}
         {persons}
-      </WithClass>
+      </Aux>
     );
 
 
@@ -155,4 +156,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
