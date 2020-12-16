@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import Person from './Person/Person';
-
 // Recieve persons from props
 
 class Persons extends PureComponent {
@@ -51,7 +50,8 @@ class Persons extends PureComponent {
           name={person.name}
           age={person.age}
           key={person.id }
-           changed={(event) => this.props.changed(event, person.id)}/>
+          changed={(event) => this.props.changed(event, person.id)}
+          />
        );
     });
 

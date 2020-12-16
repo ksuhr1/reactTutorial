@@ -5,6 +5,7 @@ import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
 import Cockpit from '../components/Cockpit/Cockpit';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Aux';
+import AuthContext from '../context/auth-context';
 
 //this container manages state and maniputlates state
 
@@ -25,6 +26,7 @@ class App extends Component {
       showPersons: false,
       showCockpit: true,
       changeCounter: 0,
+      authenticated: false,
 
     }
   }
@@ -50,17 +52,7 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState, snapshot){
     console.log('[App.js] componentDidUpdate');
   }
-  //
-  // state = {
-  //   persons: [
-  //     {id: '1', name: 'Max', age: 28 },
-  //     {id: '2', name: 'Manu', age: 29},
-  //     {id: '3', name: 'Stephanie', age: 26}
-  //   ],
-  //   otherState: 'some other value',
-  //   showPersons: false
-  //
-  // }
+
 
   nameChangedHandler = (event, id) => {
     // find person index
@@ -102,7 +94,11 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     // set state merges to the author state
     this.setState({showPersons: !doesShow});
-  }
+  };
+
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  };
 
 
   deletePersonHandler = (personIndex) => {
@@ -118,7 +114,7 @@ class App extends Component {
     // was updated
     this.setState({persons: persons});
 
-  }
+  };
   // everything in render is always called
   //this will take individual elements of array
   // and render them to the DOM if they are valid jsx
@@ -132,7 +128,8 @@ class App extends Component {
           <Persons
           persons={this.state.persons}
           clicked={this.deletePersonHandler}
-          changed={this.nameChangedHandler} />
+          changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated} />
       );
     }
 
@@ -144,15 +141,19 @@ class App extends Component {
             }}
           > Remove Cockpit
           </button>
-          {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePersonsHandler}
-            />
-        ) : null}
-        {persons}
+          <AuthContext.Provider value={{
+              authenticated: this.state.authenticated,
+              login: this.loginHandler}}>
+              {this.state.showCockpit ? (
+              <Cockpit
+                title={this.props.appTitle}
+                showPersons={this.state.showPersons}
+                personsLength={this.state.persons.length}
+                clicked={this.togglePersonsHandler}
+                />
+            ) : null}
+            {persons}
+          </AuthContext.Provider>
       </Aux>
     );
 
