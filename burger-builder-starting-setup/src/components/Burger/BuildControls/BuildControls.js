@@ -9,8 +9,11 @@ const controls = [
   {label: 'Meat', type: 'meat'},
 ];
 
+// {salad: true, mean: false, ...}
+// if it is true, should be disabled
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
+  <p> Current Price: <strong>{props.price.toFixed(2)} </strong></p>
     {controls.map(ctrl => (
       <BuildControl
       key={ctrl.label}
